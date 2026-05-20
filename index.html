@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flower Gift </title>
+
+  <!-- Font Estetik -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+      background:linear-gradient(135deg,#ffe0ea,#fff5f8);
+      font-family:"Inter", sans-serif;
+    }
+
+    .container{
+      text-align:center;
+      padding:20px;
+    }
+
+    button{
+      padding:15px 35px;
+      border:none;
+      border-radius:50px;
+      background:#ff5c8a;
+      color:white;
+      font-size:18px;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 10px 25px rgba(255,92,138,0.3);
+    }
+
+    button:hover{
+      transform:scale(1.05);
+    }
+
+    .flower-box{
+      display:none;
+      margin-top:30px;
+      animation:fade 1.5s ease;
+    }
+
+    .message{
+      font-family:"Playfair Display", serif;
+      font-size:42px;
+      color:#ff4f81;
+      margin-bottom:18px;
+      animation:floatText 2s infinite ease-in-out;
+      text-shadow:0 4px 10px rgba(255,79,129,0.2);
+    }
+
+    .flower-img{
+      width:220px;
+      animation:bloom 2s ease;
+      filter:drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+    }
+
+    @keyframes bloom{
+      0%{
+        transform:scale(0);
+        opacity:0;
+      }
+      100%{
+        transform:scale(1);
+        opacity:1;
+      }
+    }
+
+    @keyframes fade{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @keyframes floatText{
+      0%{
+        transform:translateY(0);
+      }
+      50%{
+        transform:translateY(-5px);
+      }
+      100%{
+        transform:translateY(0);
+      }
+    }
+
+    .heart{
+      position:absolute;
+      color:#ff7aa2;
+      animation:float 6s linear infinite;
+      font-size:20px;
+      opacity:0.7;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(100vh) scale(0.5);
+      }
+      100%{
+        transform:translateY(-120px) scale(1.5);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <button onclick="showFlower()">
+      coba pencet ini
+    </button>
+
+    <div class="flower-box" id="flowerBox">
+
+      <div class="message">
+        kamu hebat, cayangg
+      </div>
+
+      <!-- GANTI flower.png dengan gambar bunga kamu -->
+      <img src="flower.jpg" class="flower-img">
+
+    </div>
+
+  </div>
+
+  <!-- Music -->
+  <audio id="music" loop>
+    <!-- GANTI lagu.mp3 dengan lagu kamu -->
+    <source src="songlove.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+
+    const messages = [
+      "kamu hebat, cayangg",
+      "zizi bangga sama kayiin",
+      "you did well today 💖",
+      "jangan nyerah yaa 🤍",
+      "zizi bakal selalu ada buat kayiin",
+      "terima kasih sudah bertahan cantikku",
+      "you are my favorite person 🌹",
+      "i'm always proud of you 💖"
+    ];
+
+    function showFlower(){
+
+      // tampilkan flower
+      document.getElementById("flowerBox").style.display = "block";
+
+      // random text
+      const randomText =
+      messages[Math.floor(Math.random() * messages.length)];
+
+      document.querySelector(".message").innerHTML = randomText;
+
+      // play music
+      document.getElementById("music").play();
+
+      // animasi hati
+      for(let i=0; i<30; i++){
+
+        let heart = document.createElement("div");
+
+        heart.classList.add("heart");
+
+        heart.innerHTML = "🎀";
+
+        heart.style.left = Math.random() * 100 + "vw";
+
+        heart.style.animationDuration =
+        (Math.random() * 3 + 3) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        },6000);
+      }
+    }
+
+  </script>
+
+</body>
+</html>
